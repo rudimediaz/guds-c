@@ -1,22 +1,28 @@
-const readline = require("readline");
+const yargs = require("yargs");
 
+const argv = yargs.argv;
 
+const section = argv._[0];
+const menu = argv._[1];
 
-const rl = readline.createInterface({
-  input: process.stdin,
-  output: process.stdout,
-  prompt: ">>>>>>> "
-});
-
-rl.prompt();
-
-rl.on("line", _input => {
-  if (_input === "exit") {
-    console.log("bye");
-    process.exit(0);
-  } else {
-    console.log('app running')
+const transfer = {
+  keyword: "transfer",
+  alias: "tr",
+  menu: {
+    add: () => {},
+    use: () => {},
+    purge: () => {}
   }
+};
 
-  rl.prompt();
-});
+function App(section, menu) {
+  const run = () => {
+    if (section === transfer.keyword || section === transfer.alias) {
+      console.log("program  is running");
+    }
+  };
+  return Object.freeze({ run });
+}
+
+const app = App(section, menu);
+app.run();
